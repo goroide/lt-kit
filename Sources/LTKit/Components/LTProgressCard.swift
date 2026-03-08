@@ -24,7 +24,7 @@ public struct LTProgressCard: View {
             HStack {
                 Text(title)
                     .font(.ltCaption)
-                    .foregroundStyle(.ltOnSurfaceSecondary)
+                    .foregroundStyle(Color.ltOnSurfaceSecondary)
                 Spacer()
                 Text("\(Int(current))/\(Int(goal))\(unit.isEmpty ? "" : " \(unit)")")
                     .font(.ltCaption)

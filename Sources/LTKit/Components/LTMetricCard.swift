@@ -19,13 +19,13 @@ public struct LTMetricCard: View {
         VStack(alignment: .leading, spacing: 4) {
             Text(title)
                 .font(.ltCaption)
-                .foregroundStyle(.ltOnSurfaceSecondary)
+                .foregroundStyle(Color.ltOnSurfaceSecondary)
             HStack(alignment: .lastTextBaseline, spacing: 2) {
                 Text(value)
                     .font(.ltTitle)
                 Text(unit)
                     .font(.ltCaption)
-                    .foregroundStyle(.ltOnSurfaceSecondary)
+                    .foregroundStyle(Color.ltOnSurfaceSecondary)
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
