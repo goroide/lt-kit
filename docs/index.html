@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LTKit — Life Tracker Component Library</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ── Sidebar Navigation ── -->
+<nav>
+  <div class="nav-logo">
+    <h1>LTKit</h1>
+    <span>Life Tracker Component Library</span>
+  </div>
+  <ul>
+    <li class="section-label">Getting Started</li>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#install">Installation</a></li>
+
+    <li class="section-label">Components</li>
+    <li><a href="#metric-card">LTMetricCard</a></li>
+    <li><a href="#progress-card">LTProgressCard</a></li>
+    <li><a href="#primary-button">LTPrimaryButton</a></li>
+    <li><a href="#plain-textfield">LTPlainTextField</a></li>
+    <li><a href="#page-header">LTPageHeader</a></li>
+
+    <li class="section-label">Features</li>
+    <li><a href="#splash">LTSplashView</a></li>
+    <li><a href="#settings">LTSettingsView</a></li>
+    <li><a href="#app-flow">LTAppFlow</a></li>
+
+    <li class="section-label">Design System</li>
+    <li><a href="#colors">Colors</a></li>
+    <li><a href="#typography">Typography</a></li>
+    <li><a href="#spacing">Spacing</a></li>
+
+    <li class="section-label">Storage</li>
+    <li><a href="#json-store">JSONStore</a></li>
+    <li><a href="#app-config">AppConfig</a></li>
+  </ul>
+</nav>
+
+<!-- ── Main Content ── -->
+<main>
+
+  <!-- Hero -->
+  <div class="hero" id="overview">
+    <h1>LTKit</h1>
+    <p>A SwiftUI component library and design system for the Life Tracker app series. Shared UI, storage, and configuration in one Swift Package.</p>
+    <div>
+      <span class="badge">Swift 5.9+</span>
+      <span class="badge">iOS 16+</span>
+      <span class="badge">macOS 13+</span>
+      <span class="badge">SwiftUI</span>
+    </div>
+  </div>
+
+  <!-- Installation -->
+  <div class="section" id="install">
+    <h2>Installation</h2>
+    <p class="lead">Add LTKit as a local Swift Package dependency via Xcodegen or Xcode's Package Manager.</p>
+
+    <h3>project.yml (Xcodegen)</h3>
+    <div class="install-block">
+      <pre>packages:
+  LTKit:
+    path: ../LTKit
+
+targets:
+  MyApp:
+    dependencies:
+      - package: LTKit
+        product: LTKit</pre>
+    </div>
+
+    <h3>Package.swift</h3>
+    <div class="install-block">
+      <pre>.package(url: "https://github.com/goroide/lt-kit", from: "1.0.0")</pre>
+    </div>
+  </div>
+
+  <!-- ── COMPONENTS ── -->
+
+  <!-- LTMetricCard -->
+  <div class="section" id="metric-card">
+    <h2>LTMetricCard</h2>
+    <p class="lead">A card displaying a single numeric metric with a label and unit.</p>
+
+    <div class="component-card">
+      <div class="component-card-header">
+        <h3>LTMetricCard</h3>
+        <p>Metric display card with optional color tint</p>
+      </div>
+      <div class="component-preview">
+        <div class="mock-metric-card">
+          <div class="label">Today</div>
+          <div>
+            <span class="value">3</span>
+            <span class="unit">times</span>
+          </div>
+        </div>
+        <div class="mock-metric-card" style="background: rgba(48,176,119,0.08);">
+          <div class="label">This Week</div>
+          <div>
+            <span class="value">12</span>
+            <span class="unit">km</span>
+          </div>
+        </div>
+      </div>
+      <div class="component-code">
+        <pre>import LTKit
+
+LTMetricCard(title: "Today", value: "3", unit: "times")
+
+LTMetricCard(title: "This Week", value: "12", unit: "km", color: .green)</pre>
+      </div>
+    </div>
+
+    <h3>Parameters</h3>
+    <table class="token-table">
+      <tr><th>Parameter</th><th>Type</th><th>Default</th><th>Description</th></tr>
+      <tr><td><span class="token-name">title</span></td><td>String</td><td>—</td><td>Label above the value</td></tr>
+      <tr><td><span class="token-name">value</span></td><td>String</td><td>—</td><td>Primary numeric display</td></tr>
+      <tr><td><span class="token-name">unit</span></td><td>String</td><td>—</td><td>Unit label beside the value</td></tr>
+      <tr><td><span class="token-name">color</span></td><td>Color</td><td>.accentColor</td><td>Card tint color</td></tr>
+    </table>
+  </div>
+
+  <!-- LTProgressCard -->
+  <div class="section" id="progress-card">
+    <h2>LTProgressCard</h2>
+    <p class="lead">A card displaying progress toward a numeric goal with a progress bar.</p>
+
+    <div class="component-card">
+      <div class="component-card-header">
+        <h3>LTProgressCard</h3>
+        <p>Goal progress card with linear indicator</p>
+      </div>
+      <div class="component-preview">
+        <div class="mock-progress-card">
+          <div class="top">
+            <span class="label">Water</span>
+            <span class="counter">5/8 cups</span>
+          </div>
+          <div class="mock-progress-track">
+            <div class="mock-progress-fill" style="width: 62.5%;"></div>
+          </div>
+        </div>
+        <div class="mock-progress-card" style="background: rgba(0,113,227,0.08);">
+          <div class="top">
+            <span class="label">Steps</span>
+            <span class="counter">7,432/10,000</span>
+          </div>
+          <div class="mock-progress-track">
+            <div class="mock-progress-fill" style="width: 74%; background: #0071e3;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="component-code">
+        <pre>import LTKit
+
+LTProgressCard(title: "Water", current: 5, goal: 8, unit: "cups", color: .green)
+
+LTProgressCard(title: "Steps", current: 7432, goal: 10000, color: .blue)</pre>
+      </div>
+    </div>
+
+    <h3>Parameters</h3>
+    <table class="token-table">
+      <tr><th>Parameter</th><th>Type</th><th>Default</th><th>Description</th></tr>
+      <tr><td><span class="token-name">title</span></td><td>String</td><td>—</td><td>Card label</td></tr>
+      <tr><td><span class="token-name">current</span></td><td>Double</td><td>—</td><td>Current value</td></tr>
+      <tr><td><span class="token-name">goal</span></td><td>Double</td><td>—</td><td>Target value</td></tr>
+      <tr><td><span class="token-name">unit</span></td><td>String</td><td>""</td><td>Unit suffix (optional)</td></tr>
+      <tr><td><span class="token-name">color</span></td><td>Color</td><td>.accentColor</td><td>Progress bar and tint color</td></tr>
+    </table>
+  </div>
+
+  <!-- LTPrimaryButton -->
+  <div class="section" id="primary-button">
+    <h2>LTPrimaryButton</h2>
+    <p class="lead">Full-width primary action button. 64pt height, no corner radius.</p>
+
+    <div class="component-card">
+      <div class="component-card-header">
+        <h3>LTPrimaryButton</h3>
+        <p>Full-width CTA button</p>
+      </div>
+      <div class="component-preview">
+        <div class="mock-primary-button">Add Habit</div>
+        <div class="mock-primary-button" style="opacity: 0.3;">Save (disabled)</div>
+      </div>
+      <div class="component-code">
+        <pre>import LTKit
+
+LTPrimaryButton("Add Habit") {
+    viewModel.addHabit()
+}
+
+LTPrimaryButton("Save", disabled: name.isEmpty) {
+    viewModel.save()
+}</pre>
+      </div>
+    </div>
+
+    <h3>Parameters</h3>
+    <table class="token-table">
+      <tr><th>Parameter</th><th>Type</th><th>Default</th><th>Description</th></tr>
+      <tr><td><span class="token-name">title</span></td><td>String</td><td>—</td><td>Button label</td></tr>
+      <tr><td><span class="token-name">disabled</span></td><td>Bool</td><td>false</td><td>Dims button and blocks tap</td></tr>
+      <tr><td><span class="token-name">action</span></td><td>() -> Void</td><td>—</td><td>Tap handler</td></tr>
+    </table>
+  </div>
+
+  <!-- LTPlainTextField -->
+  <div class="section" id="plain-textfield">
+    <h2>LTPlainTextField</h2>
+    <p class="lead">UITextField wrapper that hides the keyboard input assistant bar (predictive text row). Borderless, bottom-line style.</p>
+
+    <div class="component-card">
+      <div class="component-card-header">
+        <h3>LTPlainTextField</h3>
+        <p>Borderless text field — no autocorrect, no input bar</p>
+      </div>
+      <div class="component-preview">
+        <input class="mock-plain-textfield" placeholder="Habit name" value="" readonly />
+        <input class="mock-plain-textfield" placeholder="Note (optional)" value="" readonly />
+      </div>
+      <div class="component-code">
+        <pre>import LTKit
+
+@State private var name = ""
+
+LTPlainTextField(placeholder: "Habit name", text: $name)
+
+// Custom font
+LTPlainTextField(
+    placeholder: "Note",
+    text: $note,
+    font: .systemFont(ofSize: 14, weight: .regular)
+)</pre>
+      </div>
+    </div>
+
+    <h3>Parameters</h3>
+    <table class="token-table">
+      <tr><th>Parameter</th><th>Type</th><th>Default</th><th>Description</th></tr>
+      <tr><td><span class="token-name">placeholder</span></td><td>String</td><td>—</td><td>Placeholder text</td></tr>
+      <tr><td><span class="token-name">text</span></td><td>Binding&lt;String&gt;</td><td>—</td><td>Two-way text binding</td></tr>
+      <tr><td><span class="token-name">font</span></td><td>UIFont</td><td>16pt regular</td><td>Text field font</td></tr>
+    </table>
+  </div>
+
+  <!-- LTPageHeader -->
+  <div class="section" id="page-header">
+    <h2>LTPageHeader</h2>
+    <p class="lead">Centered title header with optional trailing action button. Used as a custom navigation title replacement.</p>
+
+    <div class="component-card">
+      <div class="component-card-header">
+        <h3>LTPageHeader</h3>
+        <p>Centered title + optional trailing button</p>
+      </div>
+      <div class="component-preview">
+        <div class="mock-page-header">
+          <span class="title">Habits</span>
+        </div>
+        <div class="mock-page-header">
+          <span class="title">Habits</span>
+          <span class="trailing">Settings</span>
+        </div>
+      </div>
+      <div class="component-code">
+        <pre>import LTKit
+
+LTPageHeader(title: "Habits")
+
+LTPageHeader(
+    title: "Habits",
+    trailingLabel: "Settings",
+    trailingAction: { showSettings = true }
+)</pre>
+      </div>
+    </div>
+
+    <h3>Parameters</h3>
+    <table class="token-table">
+      <tr><th>Parameter</th><th>Type</th><th>Default</th><th>Description</th></tr>
+      <tr><td><span class="token-name">title</span></td><td>String</td><td>—</td><td>Centered title text</td></tr>
+      <tr><td><span class="token-name">trailingLabel</span></td><td>String?</td><td>nil</td><td>Trailing button label</td></tr>
+      <tr><td><span class="token-name">trailingAction</span></td><td>(() -> Void)?</td><td>nil</td><td>Trailing button action</td></tr>
+    </table>
+  </div>
+
+  <!-- ── FEATURES ── -->
+
+  <!-- LTSplashView -->
+  <div class="section" id="splash">
+    <h2>LTSplashView</h2>
+    <p class="lead">Reusable splash/loading screen with app logo, display name, and optional subtitle.</p>
+
+    <div class="component-card">
+      <div class="component-card-header">
+        <h3>LTSplashView</h3>
+        <p>App launch splash screen</p>
+      </div>
+      <div class="component-preview">
+        <div class="mock-splash">
+          <div class="splash-logo"></div>
+          <span class="splash-name">CORE HABIT</span>
+          <span class="splash-subtitle">Life Tracker Lab</span>
+        </div>
+      </div>
+      <div class="component-code">
+        <pre>import LTKit
+
+LTSplashView(
+    appDisplayName: "CORE HABIT",
+    logoImageName: "SplashLogo",   // Assets.xcassets
+    subtitle: "Life Tracker Lab"
+)</pre>
+      </div>
+    </div>
+
+    <h3>Parameters</h3>
+    <table class="token-table">
+      <tr><th>Parameter</th><th>Type</th><th>Default</th><th>Description</th></tr>
+      <tr><td><span class="token-name">appDisplayName</span></td><td>String</td><td>—</td><td>App name displayed on splash</td></tr>
+      <tr><td><span class="token-name">logoImageName</span></td><td>String</td><td>"SplashLogo"</td><td>Image asset name (falls back to placeholder)</td></tr>
+      <tr><td><span class="token-name">subtitle</span></td><td>String</td><td>""</td><td>Optional subtitle below the name</td></tr>
+    </table>
+  </div>
+
+  <!-- LTSettingsView -->
+  <div class="section" id="settings">
+    <h2>LTSettingsView</h2>
+    <p class="lead">Pre-built settings screen: History link, Privacy Policy, and Clear Data button. Fully configured via <code>AppConfig</code>.</p>
+
+    <div class="component-card">
+      <div class="component-card-header">
+        <h3>LTSettingsView</h3>
+        <p>Settings screen with history, privacy, and data controls</p>
+      </div>
+      <div class="component-preview">
+        <div class="mock-settings">
+          <div class="row">History <span class="chevron">›</span></div>
+          <div class="row">Privacy Policy <span class="chevron">›</span></div>
+          <div class="row destructive">Clear Data</div>
+        </div>
+      </div>
+      <div class="component-code">
+        <pre>import LTKit
+
+LTSettingsView(
+    config: AppConfig.current,
+    onClearAllData: { viewModel.clearAllData() }
+) {
+    HistoryView(viewModel: viewModel)
+}</pre>
+      </div>
+    </div>
+
+    <p>If <code>AppConfig.privacyPolicyURL</code> is set, Privacy Policy opens that URL. Otherwise it shows the built-in <code>LTPrivacyPolicyView</code>.</p>
+  </div>
+
+  <!-- LTAppFlow -->
+  <div class="section" id="app-flow">
+    <h2>LTAppFlow</h2>
+    <p class="lead">Manages the standard app startup sequence: Splash → FirstTime (if data is empty) → Home. Handles the splash timer and <code>@AppStorage</code> flag automatically.</p>
+
+    <div class="component-card">
+      <div class="component-card-header">
+        <h3>LTAppFlow</h3>
+        <p>Splash → FirstTime / Home routing</p>
+      </div>
+      <div class="component-code">
+        <pre>import LTKit
+
+LTAppFlow(
+    splashDisplayName: AppConfig.current.appDisplayName,
+    splashLogoName: "SplashLogo",
+    splashSubtitle: "Life Tracker Lab",
+    hasSeenSplashKey: "hasSeenSplash",
+    isEmpty: viewModel.habits.isEmpty
+) {
+    HomeView(viewModel: viewModel)           // shown when data exists
+} firstTime: {
+    FirstTimeView(viewModel: viewModel)      // shown on first launch
+}</pre>
+      </div>
+    </div>
+
+    <h3>Parameters</h3>
+    <table class="token-table">
+      <tr><th>Parameter</th><th>Type</th><th>Default</th><th>Description</th></tr>
+      <tr><td><span class="token-name">splashDisplayName</span></td><td>String</td><td>—</td><td>App name shown on splash</td></tr>
+      <tr><td><span class="token-name">splashLogoName</span></td><td>String</td><td>"SplashLogo"</td><td>Logo image asset</td></tr>
+      <tr><td><span class="token-name">splashSubtitle</span></td><td>String</td><td>""</td><td>Subtitle on splash</td></tr>
+      <tr><td><span class="token-name">hasSeenSplashKey</span></td><td>String</td><td>—</td><td>UserDefaults key for splash flag</td></tr>
+      <tr><td><span class="token-name">isEmpty</span></td><td>Bool</td><td>—</td><td>Whether to route to firstTime</td></tr>
+      <tr><td><span class="token-name">home</span></td><td>@ViewBuilder</td><td>—</td><td>Content shown when data exists</td></tr>
+      <tr><td><span class="token-name">firstTime</span></td><td>@ViewBuilder</td><td>—</td><td>Content shown on first launch</td></tr>
+    </table>
+
+    <p style="margin-top:16px;">⚠️ <strong>Note:</strong> If your app clears all data and needs to re-show the FirstTime screen dynamically, use <code>LTSplashView</code> directly rather than <code>LTAppFlow</code>, as <code>onAppear</code> does not re-trigger after initial render.</p>
+  </div>
+
+  <!-- ── DESIGN SYSTEM ── -->
+
+  <!-- Colors -->
+  <div class="section" id="colors">
+    <h2>Colors</h2>
+    <p class="lead">Semantic color tokens that adapt automatically to Light / Dark mode via UIKit system colors. Use <code>Color.ltXxx</code> in SwiftUI.</p>
+
+    <table class="token-table">
+      <tr>
+        <th>Token</th>
+        <th>Light</th>
+        <th>Dark</th>
+        <th>Usage</th>
+      </tr>
+      <tr>
+        <td><span class="token-name">Color.ltSurface</span></td>
+        <td><span class="color-swatch" style="background:#ffffff;"></span>#FFFFFF</td>
+        <td><span class="color-swatch" style="background:#000000; border-color:#555;"></span>#000000</td>
+        <td>Screen / sheet background</td>
+      </tr>
+      <tr>
+        <td><span class="token-name">Color.ltOnSurface</span></td>
+        <td><span class="color-swatch" style="background:#000000;"></span>#000000</td>
+        <td><span class="color-swatch" style="background:#ffffff; border-color:#555;"></span>#FFFFFF</td>
+        <td>Primary text and icons</td>
+      </tr>
+      <tr>
+        <td><span class="token-name">Color.ltOnSurfaceSecondary</span></td>
+        <td><span class="color-swatch" style="background:#6e6e73;"></span>#6E6E73</td>
+        <td><span class="color-swatch" style="background:#8e8e93;"></span>#8E8E93</td>
+        <td>Secondary text, captions</td>
+      </tr>
+      <tr>
+        <td><span class="token-name">Color.ltSeparator</span></td>
+        <td><span class="color-swatch" style="background:#c6c6c8;"></span>#C6C6C8</td>
+        <td><span class="color-swatch" style="background:#38383a;"></span>#38383A</td>
+        <td>Dividers and borders</td>
+      </tr>
+    </table>
+
+    <h3>Hex initializer</h3>
+    <div class="install-block">
+      <pre>// Color(hex:) is provided by LTKit
+Color(hex: "#FF81CC")
+Color(hex: "FF81CC")   // # prefix optional</pre>
+    </div>
+  </div>
+
+  <!-- Typography -->
+  <div class="section" id="typography">
+    <h2>Typography</h2>
+    <p class="lead">System font scale using <code>-apple-system</code>. Use <code>.ltXxx</code> Font extensions in SwiftUI.</p>
+
+    <table class="token-table">
+      <tr><th>Token</th><th>Size</th><th>Weight</th><th>Usage</th></tr>
+      <tr>
+        <td><span class="token-name">.ltLargeTitle</span></td>
+        <td>34pt</td><td>Bold</td>
+        <td>App name, splash screen</td>
+      </tr>
+      <tr>
+        <td><span class="token-name">.ltTitle</span></td>
+        <td>20pt</td><td>Bold</td>
+        <td>Page titles, primary button labels</td>
+      </tr>
+      <tr>
+        <td><span class="token-name">.ltHeadline</span></td>
+        <td>16pt</td><td>Semibold</td>
+        <td>Section headers</td>
+      </tr>
+      <tr>
+        <td><span class="token-name">.ltBody</span></td>
+        <td>16pt</td><td>Regular</td>
+        <td>Body text, list items</td>
+      </tr>
+      <tr>
+        <td><span class="token-name">.ltSubheadline</span></td>
+        <td>14pt</td><td>Regular</td>
+        <td>Supporting text</td>
+      </tr>
+      <tr>
+        <td><span class="token-name">.ltCaption</span></td>
+        <td>12pt</td><td>Regular</td>
+        <td>Labels, metadata, card captions</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Spacing -->
+  <div class="section" id="spacing">
+    <h2>Spacing</h2>
+    <p class="lead">Consistent spacing constants via <code>LTSpacing</code>. Use these for padding, gaps, and margins.</p>
+
+    <table class="token-table">
+      <tr><th>Token</th><th>Value</th><th>Usage</th></tr>
+      <tr><td><span class="token-name">LTSpacing.xs</span></td><td>4pt</td><td>Icon padding, tight gaps</td></tr>
+      <tr><td><span class="token-name">LTSpacing.sm</span></td><td>8pt</td><td>Item spacing, button inner padding</td></tr>
+      <tr><td><span class="token-name">LTSpacing.md</span></td><td>16pt</td><td>Standard padding, list row gaps</td></tr>
+      <tr><td><span class="token-name">LTSpacing.lg</span></td><td>24pt</td><td>Section padding, large gaps</td></tr>
+      <tr><td><span class="token-name">LTSpacing.xl</span></td><td>40pt</td><td>Screen padding, splash margins</td></tr>
+    </table>
+  </div>
+
+  <!-- ── STORAGE ── -->
+
+  <!-- JSONStore -->
+  <div class="section" id="json-store">
+    <h2>JSONStore</h2>
+    <p class="lead">Generic, Codable-backed JSON file storage. Reads and writes to the app's Documents directory by default.</p>
+
+    <div class="component-card">
+      <div class="component-card-header">
+        <h3>JSONStore&lt;T: Codable&gt;</h3>
+        <p>Type-safe persistent JSON storage</p>
+      </div>
+      <div class="component-code">
+        <pre>import LTKit
+
+// In a ViewModel
+private let habitStore = JSONStore&lt;[Habit]&gt;(fileName: "habits.json")
+private let logStore   = JSONStore&lt;[HabitLog]&gt;(fileName: "habitLogs.json")
+
+// Load
+habits = habitStore.load() ?? []
+
+// Save
+habitStore.save(habits)
+
+// Clear
+habitStore.clear()
+
+// For testing — inject a temp directory
+let store = JSONStore&lt;[Habit]&gt;(fileName: "habits.json", directory: tempDir)</pre>
+      </div>
+    </div>
+
+    <h3>API</h3>
+    <table class="token-table">
+      <tr><th>Method / Init</th><th>Description</th></tr>
+      <tr><td><span class="token-name">init(fileName:directory:)</span></td><td>Creates store. <code>directory</code> defaults to Documents.</td></tr>
+      <tr><td><span class="token-name">load() -> T?</span></td><td>Decodes and returns stored value, or nil if missing/corrupt.</td></tr>
+      <tr><td><span class="token-name">save(_ value: T)</span></td><td>Encodes and writes value to disk.</td></tr>
+      <tr><td><span class="token-name">clear()</span></td><td>Deletes the underlying file.</td></tr>
+    </table>
+  </div>
+
+  <!-- AppConfig -->
+  <div class="section" id="app-config">
+    <h2>AppConfig</h2>
+    <p class="lead">Per-app configuration struct. Define one <code>static let current</code> per app target using an extension.</p>
+
+    <div class="component-card">
+      <div class="component-card-header">
+        <h3>AppConfig</h3>
+        <p>App identity, colors, storage keys, and URLs</p>
+      </div>
+      <div class="component-code">
+        <pre>// AppConfig+App.swift (in your app target)
+import SwiftUI
+import LTKit
+
+extension AppConfig {
+    static let current = AppConfig(
+        appName: "CoreHabit",
+        appDisplayName: "CORE HABIT",
+        bundleId: "com.goroide.corehabit",
+        accentColor: Color(hex: "#FF81CC"),
+        storageKeys: .init(
+            primaryFile: "habits.json",
+            secondaryFile: "habitLogs.json"
+        ),
+        privacyPolicyURL: nil,    // nil = use LTPrivacyPolicyView
+        appStoreURL: nil
+    )
+}</pre>
+      </div>
+    </div>
+
+    <h3>Properties</h3>
+    <table class="token-table">
+      <tr><th>Property</th><th>Type</th><th>Description</th></tr>
+      <tr><td><span class="token-name">appName</span></td><td>String</td><td>Internal app identifier</td></tr>
+      <tr><td><span class="token-name">appDisplayName</span></td><td>String</td><td>User-visible name (splash, settings)</td></tr>
+      <tr><td><span class="token-name">bundleId</span></td><td>String</td><td>Bundle identifier</td></tr>
+      <tr><td><span class="token-name">accentColor</span></td><td>Color</td><td>App accent color</td></tr>
+      <tr><td><span class="token-name">storageKeys.primaryFile</span></td><td>String</td><td>Primary JSON file name</td></tr>
+      <tr><td><span class="token-name">storageKeys.secondaryFile</span></td><td>String?</td><td>Optional secondary JSON file</td></tr>
+      <tr><td><span class="token-name">privacyPolicyURL</span></td><td>URL?</td><td>External privacy policy URL (nil = built-in view)</td></tr>
+      <tr><td><span class="token-name">appStoreURL</span></td><td>URL?</td><td>App Store link (optional)</td></tr>
+    </table>
+  </div>
+
+</main>
+
+<script>
+  // Highlight active nav link on scroll
+  const sections = document.querySelectorAll('.section, .hero');
+  const navLinks = document.querySelectorAll('nav a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(a => a.classList.remove('active'));
+        const id = entry.target.id;
+        const active = document.querySelector(`nav a[href="#${id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
