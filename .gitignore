@@ -1,0 +1,4 @@
+# LTKit build artifacts
+.build/
+.swiftpm/
+.DS_Store
